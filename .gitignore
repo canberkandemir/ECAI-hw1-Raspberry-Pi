@@ -1,0 +1,22 @@
+# Compiled object files
+*.o
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Python cache
+__pycache__/
+*.pyc
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Generated executables
+hw1/src/sparse_gemm/benchmark
+hw1/src/sparse_gemm/test_kernel

@@ -135,6 +135,9 @@ static int benchmark_one(FILE *out, const char *run_id,
         start = now_seconds();
         for (size_t r = 0; r < repetitions; ++r) (void)run_case(item);
         samples[sample] = (now_seconds() - start) * 1.0e6 / repetitions;
+        // Added for Exercise 1: print individual timing samples.
+        fprintf(stderr, "SAMPLE,%s,%zu,%.6f\n",
+                item->name, sample + 1, samples[sample]);
         observable += gc[HW1_M * HW1_N - 1];
     }
     write_row(out, run_id, item, "pass", samples, SAMPLE_COUNT, repetitions);

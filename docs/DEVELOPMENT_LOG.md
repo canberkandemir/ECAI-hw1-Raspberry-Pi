@@ -98,3 +98,117 @@ Git changes have not yet been committed or pushed to the remote repository.
 ### Session Status
 
 Documentation setup in progress. No kernel implementation work started.
+
+
+---
+
+## Session 02 — 5 November 2026
+### Exercise 1: Baseline Validation and Benchmarking
+
+**Developer:** Canberk  
+**Hardware:** Raspberry Pi 4  
+**Status:** Completed
+
+### 1. Objective
+
+Validate the provided sparse scalar GEMM against the dense reference and benchmark the three baseline implementations:
+
+- `dense_scalar`
+- `dense_tiled_neon_openmp_TN8_T4`
+- `sparse_scalar`
+
+### 2. Fixed Test Configuration
+
+- M = 128
+- K = 512
+- N = 512
+- Nonzero 4×4 blocks (nnzb) = 4096
+- Density = 0.25
+- Data type = FP32
+- Compiler optimization = `-O0`
+- Target CPU = Cortex-A72
+
+### 3. Correctness Validation
+
+The provided test program was compiled and executed on the Raspberry Pi 4.
+
+Results:
+
+- `dense_tiled_neon_openmp_TN8_T4`: PASS
+- `sparse_scalar`: PASS
+- Optimized sparse kernels: SKIP (not implemented yet)
+
+The sparse scalar implementation passed correctness validation against the dense reference.
+
+No GEMM kernel implementations were modified.
+
+### 4. Benchmark Methodology
+
+The provided benchmark program was used with:
+
+- 2 warmup executions
+- 5 measured timing samples per kernel
+- Monotonic clock timing
+- Automatic selection of repetitions
+- Correctness validation before timing
+
+The professor's original `benchmark.c` formatting and logic were preserved.
+
+Only the following lines were added after the timing sample calculation:
+
+```c
+        // Added for Exercise 1: print individual timing samples.
+        fprintf(stderr, "SAMPLE,%s,%zu,%.6f\n",
+                item->name, sample + 1, samples[sample]);
+```
+
+This addition prints individual execution times for calculating latency standard deviation. It does not modify GEMM computation or timing methodology.
+
+### 5. Final Benchmark Results
+
+Benchmark run ID: `20261105T174226`
+
+| Kernel | Threads | Median (ms) | Sample Std. (ms) |
+|---|---:|---:|---:|
+| Dense scalar | 1 | 590.5 | 6.8 |
+| Dense tiled NEON OpenMP | 4 | 85.7 | 4.0 |
+| Sparse scalar | 1 | 98.1 | 0.9 |
+
+Latency values are rounded to one decimal place.
+
+Standard deviation was calculated externally from five individual timing samples using the sample standard deviation formula (n-1).
+
+### 6. Analytical Operational Intensity
+
+Under the ideal single-level-memory model with unlimited registers and unique data transfers:
+
+- Dense scalar: 42.67 FLOP/byte
+- Dense tiled NEON OpenMP: 42.67 FLOP/byte
+- Sparse scalar: 20.88 FLOP/byte
+
+Sparse OI includes input/output matrices, stored FP32 weights, and BCC metadata with 32-bit indices.
+
+### 7. Performance Analysis
+
+The fastest dense baseline was `dense_tiled_neon_openmp_TN8_T4`.
+
+- Dense optimized was approximately 6.9× faster than dense scalar.
+- Sparse scalar was approximately 6.0× faster than dense scalar.
+- Dense optimized was approximately 1.14× faster than sparse scalar.
+
+Although sparse scalar reduces arithmetic by skipping zero blocks, the optimized dense implementation benefits from tiling, NEON SIMD, and four-thread OpenMP parallelism.
+
+### 8. Generated Files
+
+- `results/raw/results_ex1_final.csv`
+- `results/raw/samples_ex1_final.log`
+
+The CSV contains the benchmark summary. The log contains individual timing samples and benchmark diagnostic messages.
+
+### 9. Completion Status
+
+Exercise 1 baseline validation and benchmarking completed.
+
+The final LaTeX report still needs to be updated with these measurements.
+
+Exercises 2–5 remain to be implemented and tested.

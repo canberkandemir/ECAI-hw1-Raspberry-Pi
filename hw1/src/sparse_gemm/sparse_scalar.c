@@ -1,5 +1,6 @@
 #include "sparse_gemm.h"
-
+// In sparse GEMM, we want to avoid unnecessary operations involving zero blocks.
+// implementation uses 4 × 4 blocks
 int gemm_sparse_scalar(const float *a, const sparse_weights *w, float *c,
                        size_t m)
 {

@@ -14,15 +14,16 @@
 void gemm_dense_scalar(const float *a, const float *w, float *c,
                        size_t m, size_t k, size_t n)
 {
-    for (size_t i = 0; i < m; ++i)
-        for (size_t j = 0; j < n; ++j) {
+    for (size_t i = 0; i < m; ++i)// Advg: Each output row can be calculated independently.
+        for (size_t j = 0; j < n; ++j) { // j selects the column of W.
             float sum = 0.0f;
-            for (size_t q = 0; q < k; ++q)
+            for (size_t q = 0; q < k; ++q) // q moves through the selected row of A and the selected column of W to calculate their dot product.
                 sum += a[i * k + q] * w[q * n + j];
             c[i * n + j] = sum;
         }
 }
-
+// OpenMP (Open Multi-Processing) is an API that allows C and C++ programs to execute work across multiple CPU threads.
+// Notice that calculating C[0][0] does not depend on C[1][0].
 // Unlike scalar GEMM, which computes C[0][0], then C[0][1], and so on,
 // this implementation computes an entire group of 8 output elements together.
 //For A: We move column by column within a fixed row, taking one element at a time.
@@ -40,9 +41,9 @@ void gemm_dense_tiled_neon_openmp_TN8_T4(const float *a, const float *w,
                                          size_t n)
 {
 #pragma omp parallel for
-    for (size_t i = 0; i < m; ++i) //The outer loop iterates through the rows of A and C. 
+    for (size_t i = 0; i < m; ++i) // Each thread receives different i iterations
     {
-        for (size_t j = 0; j < n; j += 8) //Process 8 columns at a time
+        for (size_t j = 0; j < n; j += 8) //  // Calculate 8 output elements
           {
             float32x4_t acc0 = vdupq_n_f32(0.0f); // acc0 will calculate columns 0–3.
             float32x4_t acc1 = vdupq_n_f32(0.0f); // acc1 will calculate columns 4–7.

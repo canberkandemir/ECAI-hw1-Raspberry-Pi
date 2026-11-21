@@ -1,0 +1,32 @@
+SAMPLE,dense_scalar,1,587839.274000
+SAMPLE,dense_scalar,2,587916.960000
+SAMPLE,dense_scalar,3,604167.055000
+SAMPLE,dense_scalar,4,591960.725000
+SAMPLE,dense_scalar,5,590543.966000
+SAMPLE,dense_tiled_neon_openmp_TN8_T4,1,92784.052000
+SAMPLE,dense_tiled_neon_openmp_TN8_T4,2,83119.506000
+SAMPLE,dense_tiled_neon_openmp_TN8_T4,3,87302.676000
+SAMPLE,dense_tiled_neon_openmp_TN8_T4,4,83195.818999
+SAMPLE,dense_tiled_neon_openmp_TN8_T4,5,85720.177000
+SAMPLE,sparse_scalar,1,98993.123000
+SAMPLE,sparse_scalar,2,97186.960000
+SAMPLE,sparse_scalar,3,98074.987000
+SAMPLE,sparse_scalar,4,99571.596999
+SAMPLE,sparse_scalar,5,97840.564000
+TODO: implement gemm_sparse_neon with four adjacent FP32 lanes
+TODO / unavailable: sparse_neon
+TODO: implement gemm_sparse_tiled and reuse weights across rows
+TODO / unavailable: sparse_tiled_TM4
+TODO: implement gemm_sparse_openmp.
+TODO / unavailable: sparse_openmp_T1
+TODO: implement gemm_sparse_openmp.
+TODO / unavailable: sparse_openmp_T2
+TODO: implement gemm_sparse_openmp.
+TODO / unavailable: sparse_openmp_T4
+TODO: implement tiled NEON sparse GEMM with OpenMP
+TODO / unavailable: sparse_openmp_tiled_neon_TM4_T1
+TODO: implement tiled NEON sparse GEMM with OpenMP
+TODO / unavailable: sparse_openmp_tiled_neon_TM4_T2
+TODO: implement tiled NEON sparse GEMM with OpenMP
+TODO / unavailable: sparse_openmp_tiled_neon_TM4_T4
+Latency results written to results_ex1_final.csv

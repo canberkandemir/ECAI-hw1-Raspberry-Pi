@@ -1,0 +1,12 @@
+run_id,kernel,threads,tile_m,status,warmups,timed_samples,repetitions,latency_median_us,latency_min_us,latency_max_us,latency_variation
+20261112T182128,dense_scalar,1,0,pass,2,5,1,572953.979000,570421.127000,596608.819000,0.045706
+20261112T182128,dense_tiled_neon_openmp_TN8_T4,4,0,pass,2,5,1,97586.926000,87804.661000,114322.997000,0.271741
+20261112T182128,sparse_scalar,1,0,pass,2,5,1,97890.958000,96951.324000,98673.521000,0.017593
+20261112T182128,sparse_neon,1,0,pass,2,5,1,61741.134000,61646.247000,61768.708000,0.001983
+20261112T182128,sparse_tiled_TM4,1,4,TODO,2,0,0,,,,,
+20261112T182128,sparse_openmp_T1,1,0,TODO,2,0,0,,,,,
+20261112T182128,sparse_openmp_T2,2,0,TODO,2,0,0,,,,,
+20261112T182128,sparse_openmp_T4,4,0,TODO,2,0,0,,,,,
+20261112T182128,sparse_openmp_tiled_neon_TM4_T1,1,4,TODO,2,0,0,,,,,
+20261112T182128,sparse_openmp_tiled_neon_TM4_T2,2,4,TODO,2,0,0,,,,,
+20261112T182128,sparse_openmp_tiled_neon_TM4_T4,4,4,TODO,2,0,0,,,,,

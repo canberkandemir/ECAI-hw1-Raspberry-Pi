@@ -1,0 +1,158 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[
+    a4paper,
+    top=2.54cm,
+    bottom=2.54cm,
+    left=2.54cm,
+    right=2.54cm
+]{geometry}
+
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+\setlist[itemize]{noitemsep, topsep=2pt}
+\setlist[enumerate]{noitemsep, topsep=2pt}
+
+\titleformat{\section}
+    {\large\bfseries}{\thesection.}{0.5em}{}
+
+\titleformat{\subsection}
+    {\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+% Placeholder for values to be filled in by students.
+\newcommand{\blank}[1][1.2cm]{\rule{#1}{0.4pt}}
+
+\begin{document}
+
+\begin{tcolorbox}[
+    colback=white,
+    colframe=black,
+    width=\textwidth,
+    arc=3mm,
+    boxrule=1pt
+]
+\begin{center}
+    \Large \textbf{Efficient Computing for Artificial Intelligence}\\[3pt]
+    \large \textbf{Homework 1}\\[5pt]
+    \textbf{\colorbox{yellow!30}{DUE DATE: 2 Dec (h23:59)}}\\[8pt]
+\end{center}
+
+\textbf{Submission Instructions:}\\[3pt]
+
+Each group must send an e-mail to
+\texttt{daniele.jahier@polito.it}, with
+\texttt{valentino.peluso@polito.it} in CC.
+Use the subject
+\textbf{ECAI27 Group\texttt{13}}.\\[3pt]
+
+Attach a single ZIP archive named
+\textbf{HW1\_Group\texttt{13}.zip}, containing:
+\begin{enumerate}
+    \item The code deliverables specified in each exercise.
+    \item The PDF report.
+\end{enumerate}
+
+Late submissions or submissions that do not comply with these
+instructions will be \textbf{automatically discarded}.
+\end{tcolorbox}
+
+\vspace{0.5cm} % Added a bit of spacing between the box and the header
+
+\begin{center}
+\Large \textbf{HW1 – Group\texttt{13}}\\[10pt]
+
+{\footnotesize
+\begin{tabular}{lll}
+\textbf{KANDEMIR CANBERK} (s\texttt{364106}) & \textbf{UYSAL EGEHAN} (s\texttt{358794}) & \textbf{CICEK BEYBIN} (s\texttt{351818}) \\
+\end{tabular}
+}
+\end{center}
+
+\section*{Results}
+
+Complete the table with the operational intensity (OI), median latency,
+and standard deviation of latency for each kernel.
+
+\begin{itemize}
+    \item \textbf{Operational intensity:}
+    Report the ideal OI in FLOP/byte, assuming a single-level memory
+    hierarchy and an infinite number of registers.
+    \item \textbf{Latency:}
+    Report the median and standard deviation of the samples in milliseconds (ms), rounded
+    to one decimal digit.
+\end{itemize}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{
+    @{}
+    >{\raggedright\arraybackslash}X
+    >{\centering\arraybackslash}p{2.0cm}
+    >{\centering\arraybackslash}p{2.6cm}
+    >{\centering\arraybackslash}p{2.6cm}
+    @{}
+}
+\toprule
+Kernel
+& OI (FLOP/byte)
+& Median latency (ms)
+& Std. latency (ms) \\
+\midrule
+
+Dense scalar
+& 42.67
+& 586.6
+& 12.8 \\
+
+Dense tiled with NEON and OpenMP
+& 42.67
+& 92.5
+& 4.4 \\
+
+Sparse scalar
+& 20.88
+& 97.8
+& 0.8 \\
+
+Sparse NEON
+& 20.88
+& 61.6
+& 0.2 \\
+
+Sparse tiled
+& 20.88
+& 53.5
+& 0.2 \\
+
+Sparse OpenMP (2 threads)
+& 20.88
+& 47.9
+& 0.2 \\
+
+Sparse OpenMP (4 threads)
+& 20.88
+& 24.2
+& 0.8 \\
+
+Sparse Combined (2 threads)
+& 20.88
+& 29.8
+& 0.2 \\
+
+Sparse Combined (4 threads)
+& 20.88
+& 15.4
+& 0.8 \\
+
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\end{document}

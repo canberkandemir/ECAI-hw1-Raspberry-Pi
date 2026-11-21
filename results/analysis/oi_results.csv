@@ -1,0 +1,3 @@
+kernel_type,flops,bytes,oi_flop_per_byte
+dense,67108864,1572864,42.666667
+sparse,16777216,803332,20.884536

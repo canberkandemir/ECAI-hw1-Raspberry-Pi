@@ -1,0 +1,8 @@
+kernel,run1_median_ms,run2_median_ms,combined_median_ms,combined_std_ms,run_variation_percent,speedup_vs_sparse_scalar,total_samples
+dense_scalar,574.283,578.559,578.111,12.073,0.742,0.17,10
+dense_tiled_neon_openmp_TN8_T4,97.623,88.565,90.008,31.788,9.73,1.093,10
+sparse_scalar,97.705,98.6,98.395,1.029,0.912,1.0,10
+sparse_neon,61.431,61.779,61.612,0.196,0.565,1.597,10
+sparse_openmp_tiled_neon_TM4_T1,55.682,55.571,55.636,0.131,0.199,1.769,10
+sparse_openmp_tiled_neon_TM4_T2,28.005,27.817,27.941,0.127,0.675,3.522,10
+sparse_openmp_tiled_neon_TM4_T4,14.136,13.959,14.053,0.214,1.262,7.002,10
